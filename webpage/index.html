@@ -38,10 +38,11 @@
             var arr = res.businesses;
             for(var i=0; i<arr.length; i++){
               // console.log(arr[i].name, arr[i].phone, arr[i].rating, arr.location);
-              $(".result-container").append(`<h3>${arr[i].name}</h3>
-                 <h4>${arr[i].rating}</h4>
-                 <h5>${arr[i].phone}</h5>
-                 <h5>${arr[i].location.address[0]}, ${arr[i].location.city}</h5>
+              $(".result-container").append(`<h2>${arr[i].name}</h2>
+                  <h4>${arr[i].rating}</h4>
+                  <h5>${arr[i].phone}</h5>
+                  <h5>${arr[i].location.display_address[0]}</h5>
+                  <h5>${arr[i].location.display_address[1]},${arr[i].location.display_address[2]}</h5>
                 `);
                 console.log(arr[i].location);
             }
