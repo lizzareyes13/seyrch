@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Personalized Yelp</title>
+    <link rel="stylesheet" href="/css/style.css" media="screen" title="no title">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans+Condensed:300" rel="stylesheet">
+  </head>
+  <body>
+
+
+    <div class="app-container">
+      <div class="search-box">
+        <h1 class="title">What would you like to search today?</h1>
+        <input type="text" id="search-input">
+        <button type="button" id="btn">Search</button>
+      </div>
+    </div>
+
+    <div id="overlay">
+      <div class="results">
+        <span>x</span>
+        <div class="result-container">
+
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $("#btn").click(function(){
+        var searchTerm = $("#search-input").val();
+        $.ajax({
+          url: "http://localhost:3000/seyrch/miami/"+searchTerm,
+          success: function(res){
+            console.log(res);
+            var arr = res.businesses;
+            for(var i=0; i<arr.length; i++){
+              // console.log(arr[i].name, arr[i].phone, arr[i].rating, arr.location);
+              $(".result-container").append(`<h3>${arr[i].name}</h3>
+                 <h4>${arr[i].rating}</h4>
+                 <h5>${arr[i].phone}</h5>
+                 <h5>${arr[i].location.address[0]}, ${arr[i].location.city}</h5>
+                `);
+                console.log(arr[i].location);
+            }
+            $("#overlay").show();
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
